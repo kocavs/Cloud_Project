@@ -79,7 +79,7 @@ function HomePage() {
   return (
     <div className="home-page">
       <ChatBox className="chat-area" />
-      <FoodRecommendation recommendations={dummyRecommendations} className="food-recommendation" />
+      <FoodRecommendation recommendationsInput={dummyRecommendations} className="food-recommendation" />
       {/* Add other components specific to the homepage here */}
     </div>
   );

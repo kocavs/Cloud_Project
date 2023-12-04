@@ -1,13 +1,13 @@
 // components/FoodRecommendation.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RestaurantCard from './RestaurantCard'; // Component for individual restaurant cards
 import RestaurantDetail from './RestaurantDetail'; // Component for showing the selected restaurant details
 import './FoodRecommendation.css';
 import apigClient from '../../api/apigClient';
 
-function FoodRecommendation({ recommendations  = []}) {
+function FoodRecommendation({ recommendationsInput = []}) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState(recommendationsInput);
 
   const handleSelectRestaurant = (restaurant) => {
     setSelectedRestaurant(restaurant);
@@ -31,7 +31,8 @@ function FoodRecommendation({ recommendations  = []}) {
         <h2>Food Recommendations</h2>
       </div>
       <div className="restaurant-cards">
-        {recommendations.map((restaurant) => (
+        {recommendations && 
+        recommendations.map((restaurant) => (
           <RestaurantCard
             key={restaurant.id}
             restaurant={restaurant}
