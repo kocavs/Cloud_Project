@@ -1,0 +1,28 @@
+.restaurant-card {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    overflow: hidden; /* Ensures the image does not bleed outside the border-radius */
+  }
+
+  .restaurant-card.selected {
+    background-color: #f8f9fa; /* Change this to the color you want */
+  }
+  
+  .restaurant-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .restaurant-name {
+    font-size: 1em;
+    margin: 0.5em 0;
+  }
+  
+  .restaurant-city {
+    font-size: 0.8em;
+    color: #666;
+  }
+  

@@ -1,0 +1,117 @@
+openapi: 3.0.1
+info:
+  title: Combined Chat and Food Recommendations API
+  description: This API provides endpoints for a chatbot and food recommendations.
+  version: 1.0.0
+
+servers:
+  - url: https://api.yourdomain.com/v1
+    description: Production server
+
+paths:
+  /messages:
+    post:
+      summary: The endpoint for the Chat API.
+      description: |
+        This API takes in a message from the client and returns
+        one or more chat messages as a response. The API leverages the backend
+        functionality, paired with state and profile information
+        and returns a context-aware reply.
+      tags:
+        - Chat
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessage'
+      responses:
+        '200':
+          description: A Chat response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatMessage'
+        '400':
+          description: Bad request if message text is empty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /recommendations:
+    get:
+      summary: List all food recommendations
+      tags:
+        - Recommendations
+      responses:
+        '200':
+          description: An array of food recommendations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodRecommendation'
+
+components:
+  schemas:
+    ChatMessage:
+      type: object
+      properties:
+        text:
+          type: string
+        sender:
+          type: string
+          enum:
+            - user
+            - bot
+    FoodRecommendation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        city:
+          type: string
+        imageUrl:
+          type: string
+          format: uri
+        rating:
+          type: number
+          format: float
+        description:
+          type: string
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    Review:
+      type: object
+      properties:
+        author:
+          type: string
+        text:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+
+tags:
+  - name: Chat
+    description: Endpoints related to chat messages
+  - name: Recommendations
+    description: Endpoints related to food recommendations
