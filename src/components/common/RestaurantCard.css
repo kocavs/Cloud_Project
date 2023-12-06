@@ -1,28 +1,40 @@
 .restaurant-card {
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px;
-    overflow: hidden; /* Ensures the image does not bleed outside the border-radius */
-  }
+  border: 1px solid #000;
+  padding: 16px;
+  margin: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
 
-  .restaurant-card.selected {
-    background-color: #f8f9fa; /* Change this to the color you want */
-  }
-  
-  .restaurant-image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .restaurant-name {
-    font-size: 1em;
-    margin: 0.5em 0;
-  }
-  
-  .restaurant-city {
-    font-size: 0.8em;
-    color: #666;
-  }
-  
+.restaurant-card:hover {
+  transform: translateY(-5px);
+}
+
+.restaurant-card.selected {
+  border-color: #4285f4;
+}
+
+.restaurant-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-name {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.restaurant-category,
+.restaurant-address,
+.restaurant-price-range,
+.restaurant-rating {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.restaurant-rating {
+  font-weight: bold;
+  color: #333;
+}

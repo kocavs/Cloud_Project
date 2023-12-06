@@ -1,38 +1,45 @@
-// components/FoodRecommendation.js
 import React, { useState, useEffect } from 'react';
-import RestaurantCard from './RestaurantCard'; // Component for individual restaurant cards
-import RestaurantDetail from './RestaurantDetail'; // Component for showing the selected restaurant details
+import PropTypes from 'prop-types';
+import RestaurantCard from './RestaurantCard';
+import RestaurantDetail from './RestaurantDetail';
 import './FoodRecommendation.css';
 import apigClient from '../../api/apigClient';
 
-function FoodRecommendation({ recommendationsInput = []}) {
+function FoodRecommendation() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  const [recommendations, setRecommendations] = useState(recommendationsInput);
+  const [recommendations, setRecommendations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    apigClient.recommendationsGet({}, {}, {})
+      .then(response => {
+        const data = JSON.parse(response.data.body);
+        console.log(data)
+        setRecommendations(data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setError('Failed to fetch recommendations');
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleSelectRestaurant = (restaurant) => {
     setSelectedRestaurant(restaurant);
   };
 
-  useEffect(() => {
-    var params = {};
-    var body = {};
-    var additionalParams = {};
-
-    apigClient.recommendationsGet(params, body, additionalParams)
-      .then(response => {
-        setRecommendations(response.data); // assuming the response data contains the recommendations
-      })
-      .catch(error => console.error('Error:', error));
-  }, []);
-
   return (
     <div className="food-recommendation">
       <div className="food-recommendation-header">
         <h2>Food Recommendations</h2>
+        {isLoading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
       </div>
       <div className="restaurant-cards">
-        {recommendations && 
-        recommendations.map((restaurant) => (
+        {recommendations.map((restaurant) => (
           <RestaurantCard
             key={restaurant.id}
             restaurant={restaurant}
@@ -45,5 +52,21 @@ function FoodRecommendation({ recommendationsInput = []}) {
     </div>
   );
 }
+
+FoodRecommendation.propTypes = {
+  initialRecommendations: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    full_address: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    price_range: PropTypes.string,
+    score: PropTypes.string,
+    ratings: PropTypes.string,
+    lat: PropTypes.string,
+    lng: PropTypes.string,
+    position: PropTypes.string
+    // Add any other relevant PropTypes based on your data structure
+  }))
+};
 
 export default FoodRecommendation;

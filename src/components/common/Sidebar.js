@@ -7,7 +7,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="logo">LOGO</div>
       <div className="navigation">
-        <NavLink to="/" className="nav-button" >ChatBot</NavLink>
+        <NavLink to="/Cloud_Project" className="nav-button" >ChatBot</NavLink>
         <NavLink to="/restaurants" className="nav-button" >Find</NavLink>
         <NavLink to="/favorites" className="nav-button" >My FAV</NavLink>
         <NavLink to="/orders" className="nav-button" >Orders</NavLink>
