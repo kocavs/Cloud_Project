@@ -1,0 +1,13 @@
+.order-page {
+    display: flex;
+  }
+  
+  .order-list {
+    width: 30%; /* Adjust width as needed */
+    /* Additional styling */
+  }
+  
+  .order-details {
+    width: 70%; /* Adjust width as needed */
+    /* Additional styling */
+  }

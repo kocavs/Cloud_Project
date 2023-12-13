@@ -2,19 +2,33 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
 
-function Sidebar() {
+
+function Sidebar({  isAuthenticated, setIsAuthenticated, redirectToLogin, userInfo, setUserInfo }) {
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('idToken');
+    localStorage.removeItem('accessToken');
+    setUserInfo(null);
+  };
+
+
   return (
     <div className="sidebar">
       <div className="logo">LOGO</div>
       <div className="navigation">
         <NavLink to="/Cloud_Project" className="nav-button" >ChatBot</NavLink>
-        <NavLink to="/restaurants" className="nav-button" >Find</NavLink>
-        <NavLink to="/favorites" className="nav-button" >My FAV</NavLink>
-        <NavLink to="/orders" className="nav-button" >Orders</NavLink>
+        <NavLink to="/Cloud_Project/orders" className="nav-button" >Orders</NavLink>
       </div>
+
       <div className="user-info">
-        <div className="user-profile">Adam Smith</div>
-        <button className="logout-button">Log Out</button>
+        {isAuthenticated ? (
+          <>
+            <div className="user-profile">{userInfo.email}</div>
+            <button onClick={handleLogout} className="logout-button">Log Out</button>
+          </>
+        ) : (
+          <button onClick={redirectToLogin} className="login-button">Login</button>
+        )}
       </div>
     </div>
   );

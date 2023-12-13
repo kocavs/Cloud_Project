@@ -56,7 +56,7 @@
     text-align: center; /* Center align user name text */
   }
   
-  .logout-button {
+  .logout-button, .login-button{
     background-color: rgb(231, 88, 88);
     padding: 10px 20px;
     border: none;
@@ -70,10 +70,18 @@
     /* Other hover styles can be added here */
   }
   
-  .logout-button:hover {
+  .logout-button:hover, .login-button:hover{
     background-color: rgb(207, 133, 133);
   }
 
   .nav-button.active {
     background-color: #cec6c5; 
+  }
+
+  .user-profile {
+    overflow-wrap: break-word; /* Ensures long words break and wrap onto the next line */
+    word-break: break-all; /* To prevent overflow, long words will be broken and wrapped */
+    white-space: nowrap; /* Prevents wrapping and instead will show an ellipsis (...) */
+    text-overflow: ellipsis; /* Adds an ellipsis when the text overflows */
+    max-width: 100%; /* Ensures the div doesn't exceed the width of its parent */
   }
