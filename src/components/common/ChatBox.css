@@ -54,6 +54,7 @@
   padding: 10px;
   margin-bottom: 20px; /* Ensure there's space below the input box */
   border-top: 1px solid #ccc; /* Just as an example */
+  align-items: center;
 }
 
 .message-input input {
@@ -71,4 +72,23 @@
   cursor: pointer;
   background-color: #007BFF; /* Example color to make the button stand out */
   color: white;
+}
+
+.file-upload-container {
+  width: 25px; /* Adjust the width as needed */
+  overflow: hidden;
+  margin-right: 10px; /* Space between file input and text input */
+}
+
+.file-upload-container input[type="file"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+.text-input-container {
+  flex-grow: 1; /* Makes the text input expand to fill the remaining space */
+}
+
+.text-input-container input[type="text"] {
+  width: 100%;
 }

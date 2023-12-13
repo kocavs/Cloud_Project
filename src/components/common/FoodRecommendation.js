@@ -5,15 +5,19 @@ import RestaurantDetail from './RestaurantDetail';
 import './FoodRecommendation.css';
 import apigClient from '../../api/apigClient';
 
-function FoodRecommendation() {
+
+function FoodRecommendation({ recommendationsInput }) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    apigClient.recommendationsGet({}, {}, {})
+    if (recommendationsInput && recommendationsInput.length > 0) {
+      setRecommendations(recommendationsInput);
+    }else{
+      setIsLoading(true);
+      apigClient.recommendationsGet({}, {}, {})
       .then(response => {
         const data = JSON.parse(response.data.body);
         console.log(data)
@@ -25,7 +29,9 @@ function FoodRecommendation() {
         setError('Failed to fetch recommendations');
         setIsLoading(false);
       });
-  }, []);
+    }
+    
+  }, [recommendationsInput]);
 
   const handleSelectRestaurant = (restaurant) => {
     setSelectedRestaurant(restaurant);
