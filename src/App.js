@@ -14,35 +14,39 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    // Check if tokens are stored in localStorage
-    const storedIdToken = localStorage.getItem('idToken');
-    const storedAccessToken = localStorage.getItem('accessToken');
+    const checkAuthentication = () => {
+      try {
+        const storedIdToken = localStorage.getItem('idToken');
+        const storedAccessToken = localStorage.getItem('accessToken');
   
-    if (storedIdToken && storedAccessToken) {
-      // User is authenticated
-      setIsAuthenticated(true);
-      // Decode the ID token
-      const decodedToken = jwtDecode(storedIdToken);
-      setUserInfo(decodedToken);
-    } else {
-      // Extract tokens from URL and store in localStorage
-      const hash = window.location.hash.substring(1);
-      const result = hash.split('&').reduce(function (res, item) {
-        const parts = item.split('=');
-        res[parts[0]] = parts[1];
-        return res;
-      }, {});
+        if (storedIdToken && storedAccessToken) {
+          const decodedToken = jwtDecode(storedIdToken);
+          setIsAuthenticated(true);
+          setUserInfo(decodedToken);
+        } else {
+          const hash = window.location.hash.substring(1);
+          const result = hash.split('&').reduce((res, item) => {
+            const parts = item.split('=');
+            res[parts[0]] = parts[1];
+            return res;
+          }, {});
   
-      if (result.id_token && result.access_token) {
-        localStorage.setItem('idToken', result.id_token);
-        localStorage.setItem('accessToken', result.access_token);
-        setIsAuthenticated(true);
-
-        // Decode the ID token
-        const decodedToken = jwtDecode(result.id_token);
-        setUserInfo(decodedToken);
+          if (result.id_token && result.access_token) {
+            localStorage.setItem('idToken', result.id_token);
+            localStorage.setItem('accessToken', result.access_token);
+            const decodedToken = jwtDecode(result.id_token);
+            setIsAuthenticated(true);
+            setUserInfo(decodedToken);
+          } else {
+            redirectToLogin();
+          }
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error);
       }
-    }
+    };
+
+    checkAuthentication();
   }, []);
 
   const redirectToLogin = () => {
@@ -51,48 +55,20 @@ function App() {
 
   return (
     <Router>
-       <div className="app">
-       <Sidebar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} redirectToLogin={redirectToLogin} userInfo={userInfo} setUserInfo={setUserInfo}/>
-         <Routes>
-           <Route path="/Cloud_Project" element={<HomePage />} />
-           <Route path="/Cloud_Project/orders" element={<OrderPage />} />
-         </Routes>
-       </div>
-     </Router>
-   );
+      <div className="app">
+        <Sidebar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} redirectToLogin={redirectToLogin} userInfo={userInfo} setUserInfo={setUserInfo}/>
+        <Routes>
+          {/* <Route path="/Cloud_Project/login" element={<LoginPage redirectToLogin={redirectToLogin} />} />
+          <Route path="/Cloud_Project/" element={isAuthenticated ? <HomePage /> : <Navigate replace to="/Cloud_Project/login" />} />
+          <Route path="/Cloud_Project/orders" element={isAuthenticated ? <OrderPage /> : <Navigate replace to="/Cloud_Project/login" />} /> */}
+          
+          <Route path="/Cloud_Project/" element={<HomePage userInfo={userInfo}/> } />
+          <Route path="/Cloud_Project/orders" element={<OrderPage userInfo={userInfo}/>} />
 
-  // return (
-  // <Router>
-  //   {isAuthenticated ? (
-  //       // Routes for authenticated users
-  //       <div className="app">
-  //         <Sidebar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} redirectToLogin={redirectToLogin}/>
-  //         <Routes>
-  //           <Route path="/Cloud_Project" element={<HomePage />} />
-  //           <Route path="/Cloud_Project/orders" element={<OrderPage />} />
-  //         </Routes>
-  //       </div>
-  //     ) : (
-  //     <Routes>
-  //       <Route path="/Cloud_Project/Login" element={<LoginPage redirectToLogin={redirectToLogin} />} />
-  //     </Routes>
-  //   )}
-  //   </Router>
-  // );
-
-  // return (
-  //   <Router>
-  //     <div className="app">
-  //       <Sidebar />
-  //       <Authenticator>
-  //         <Routes>
-  //           <Route path="/Cloud_Project" element={<HomePage />} />
-  //           <Route path="/Cloud_Project/orders" element={<OrderPage />} />
-  //         </Routes>
-  //       </Authenticator>
-  //     </div>
-  //   </Router>
-  // );
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

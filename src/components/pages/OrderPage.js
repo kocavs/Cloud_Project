@@ -1,14 +1,57 @@
-import React from 'react';
-import './OrderPage.css'; // Create a corresponding CSS file for styling
+import React, {useState, useEffect} from 'react';
+import './OrderPage.css'; 
+import OrderList from '../common/OrderList';
+import OrderDetails from '../common/OrderDetails';
+import apigClient from '../../api/apigClient';
 
-function OrderPage() {
+function OrderPage({ userInfo }) {
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
+  const handleOrderClick = (order) => {
+    setSelectedOrder(order);
+  };
+
+  useEffect(() => {
+    // if (!isAuthenticated) {
+    //   setIsLoading(false);
+    //   setError('Please log in to view orders.');
+    //   return;
+    // }
+
+    const params = {
+        user_id: userInfo.email      
+    };
+
+    apigClient.ordersGet(params,{}, {})
+      .then(response => {
+        const responseBody = JSON.parse(response.data);
+        console.log(responseBody)
+        setOrders(responseBody); // Update with your actual data structure
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error("Error fetching orders:", error);
+        setIsLoading(false);
+      });
+  }, []); // Empty array ensures this runs once on component mount
+
+
+  if (isLoading) {
+    return <div className="order-page">Loading orders...</div>;
+  }
+
   return (
     <div className="order-page">
-      <div className="order-list">
-        {/* List of orders will go here */}
+      <div className="orders">
+        <OrderList 
+        orders={orders} 
+        onOrderClick={handleOrderClick} 
+        selectedOrderId={selectedOrder ? selectedOrder.order_id : null}/>
       </div>
       <div className="order-details">
-        {/* Order details will be displayed here */}
+        {selectedOrder && <OrderDetails order={selectedOrder} />}
       </div>
     </div>
   );

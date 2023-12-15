@@ -1,13 +1,17 @@
 .order-page {
     display: flex;
+    justify-content: flex-start; /* Align the child components to the start horizontally */
+    align-items: start; /* Align the child components to the top */
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw;
   }
   
-  .order-list {
-    width: 30%; /* Adjust width as needed */
+  .orders {
+    width: 320px; /* Adjust width as needed */
     /* Additional styling */
   }
   
   .order-details {
-    width: 70%; /* Adjust width as needed */
+    width: 900px; /* Adjust width as needed */
     /* Additional styling */
   }

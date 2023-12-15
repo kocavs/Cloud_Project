@@ -13,6 +13,11 @@ function FoodRecommendation({ recommendationsInput }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // if(!isAuthenticated){
+    //   setError('Please Login to view food Recommendation');
+    //   return;
+    // }
+
     if (recommendationsInput && recommendationsInput.length > 0) {
       setRecommendations(recommendationsInput);
     }else{

@@ -4,12 +4,16 @@ import ChatBox from '../common/ChatBox';
 import './HomePage.css'
 import FoodRecommendation from '../common/FoodRecommendation';
 
-function HomePage() {
+function HomePage({ userInfo }) {
   const [webSocket, setWebSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [foodRecommendations, setFoodRecommendations] = useState([]);
 
   useEffect(() => {
+    // if(! isAuthenticated){
+    //   setMessages([{ sender: "bot", text: "Please login first to use the service." }]);
+    //   return;
+    // }
     // Initialize WebSocket connection
     const ws = new WebSocket('wss://gnzcvg3d4l.execute-api.us-east-1.amazonaws.com/test/');
 
@@ -68,7 +72,7 @@ function HomePage() {
   return (
     <div className="home-page">
       <ChatBox className="chat-area" webSocket={webSocket} messages={messages} setMessages={setMessages} />
-      <FoodRecommendation recommendationsInput={foodRecommendations} className="food-recommendation" webSocket={webSocket} />
+      <FoodRecommendation recommendationsInput={foodRecommendations} className="food-recommendation" webSocket={webSocket}  />
       {/* Add other components specific to the homepage here */}
     </div>
   );

@@ -1,11 +1,12 @@
 {
   "name": "cloud-project",
-  "homepage": "https://Dhiren-NYU.github.io/Cloud_Project",
+  "homepage": "https://Dhiren-NYU.github.io/Cloud_Project/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@aws-amplify/api-rest": "^4.0.6",
     "@aws-amplify/ui-react": "^6.0.6",
+    "@react-google-maps/api": "^2.19.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

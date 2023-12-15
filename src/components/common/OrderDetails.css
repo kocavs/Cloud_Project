@@ -1,0 +1,30 @@
+.order-details-container {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-heading, .order-items-heading {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-info p, .order-item p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.order-items-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-item {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

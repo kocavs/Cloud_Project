@@ -9,6 +9,7 @@ function Sidebar({  isAuthenticated, setIsAuthenticated, redirectToLogin, userIn
     localStorage.removeItem('idToken');
     localStorage.removeItem('accessToken');
     setUserInfo(null);
+    redirectToLogin()
   };
 
 
@@ -16,8 +17,8 @@ function Sidebar({  isAuthenticated, setIsAuthenticated, redirectToLogin, userIn
     <div className="sidebar">
       <div className="logo">LOGO</div>
       <div className="navigation">
-        <NavLink to="/Cloud_Project" className="nav-button" >ChatBot</NavLink>
-        <NavLink to="/Cloud_Project/orders" className="nav-button" >Orders</NavLink>
+        <NavLink to="/Cloud_Project/" end activeClassName="active" className="nav-button" >ChatBot</NavLink>
+        <NavLink to="/Cloud_Project/orders" activeClassName="active" className="nav-button" >Orders</NavLink>
       </div>
 
       <div className="user-info">
