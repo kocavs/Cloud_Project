@@ -53,7 +53,7 @@ apigClientFactory.newClient = function (config) {
 
     
     // extract endpoint and path from url
-    var invokeUrl = 'https://1fpg5htwgl.execute-api.us-east-1.amazonaws.com/v3';
+    var invokeUrl = 'https://k29zm6imci.execute-api.us-east-1.amazonaws.com/testV1';
     var endpoint = /(^https?:\/\/[^\/]+)/g.exec(invokeUrl)[1];
     var pathComponent = invokeUrl.substring(endpoint.length);
 
@@ -83,111 +83,75 @@ apigClientFactory.newClient = function (config) {
     
     
     
-    apigClient.completeDeliveryPost = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
-        
-        var completeDeliveryPostRequest = {
-            verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/completeDelivery').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(completeDeliveryPostRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.completeDeliveryOptions = function (params, body, additionalParams) {
+    apigClient.getOrderDetailsPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var completeDeliveryOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/completeDelivery').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(completeDeliveryOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.locationPost = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
-        
-        var locationPostRequest = {
+        var getOrderDetailsPostRequest = {
             verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/location').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/getOrderDetails').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(locationPostRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(getOrderDetailsPostRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.locationOptions = function (params, body, additionalParams) {
+    apigClient.getOrderDetailsOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var locationOptionsRequest = {
+        var getOrderDetailsOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/location').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/getOrderDetails').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(locationOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(getOrderDetailsOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.messagesPost = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
-        
-        var messagesPostRequest = {
-            verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/messages').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(messagesPostRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.messagesOptions = function (params, body, additionalParams) {
+    apigClient.getReservationDetailsPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var messagesOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/messages').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+        var getReservationDetailsPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/getReservationDetails').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(messagesOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(getReservationDetailsPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.getReservationDetailsOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var getReservationDetailsOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/getReservationDetails').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(getReservationDetailsOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
@@ -224,78 +188,6 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(ordersOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.recommendationsGet = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var recommendationsGetRequest = {
-            verb: 'get'.toUpperCase(),
-            path: pathComponent + uritemplate('/recommendations').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(recommendationsGetRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.recommendationsOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var recommendationsOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/recommendations').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(recommendationsOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.uploadPost = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
-        
-        var uploadPostRequest = {
-            verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/upload').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(uploadPostRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.uploadOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var uploadOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/upload').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(uploadOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
 
