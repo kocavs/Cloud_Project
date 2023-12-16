@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import Sidebar from './components/common/Sidebar';
 import HomePage from './components/pages/HomePage';
 import OrderPage from './components/pages/OrderPage';
+import ReservationPage from './components/pages/ReservationPage';
 import './App.css';
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           
           <Route path="/Cloud_Project/" element={<HomePage userInfo={userInfo}/> } />
           <Route path="/Cloud_Project/orders" element={<OrderPage userInfo={userInfo}/>} />
+          <Route path="/Cloud_Project/reservations" element={<ReservationPage userInfo={userInfo}/>} />
 
         </Routes>
       </div>

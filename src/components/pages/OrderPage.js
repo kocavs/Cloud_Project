@@ -14,21 +14,14 @@ function OrderPage({ userInfo }) {
   };
 
   useEffect(() => {
-    // if (!isAuthenticated) {
-    //   setIsLoading(false);
-    //   setError('Please log in to view orders.');
-    //   return;
-    // }
-
     const params = {
         user_id: userInfo.email      
     };
 
     apigClient.ordersGet(params,{}, {})
       .then(response => {
-        const responseBody = JSON.parse(response.data);
-        console.log(responseBody)
-        setOrders(responseBody); // Update with your actual data structure
+        console.log(response.data.body);
+        setOrders(response.data.body); // Update with your actual data structure
         setIsLoading(false);
       })
       .catch(error => {
