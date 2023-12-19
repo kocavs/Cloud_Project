@@ -1,7 +1,7 @@
 import React, {useEffect, useState}from 'react';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
-function DeliveryMap({ deliveryLocation, restaurantLocation, orderStatus}) {
+function DeliveryMap({ deliveryLocation, restaurantLocation, orderStatus, deliveryPositions}) {
     const [userLocation, setUserLocation] = useState(null);
     const mapContainerStyle = {
         height: '400px',
@@ -21,8 +21,8 @@ function DeliveryMap({ deliveryLocation, restaurantLocation, orderStatus}) {
         }
       }, []);
 
-    const center = orderStatus === 'Out for delivery' ? deliveryLocation : restaurantLocation;
-
+    // const center = orderStatus === 'Out For Delivery' ? deliveryLocation : restaurantLocation;
+      const center = restaurantLocation;
     const createIcon = (iconPath) => {
         return {
             url: iconPath
@@ -52,6 +52,14 @@ function DeliveryMap({ deliveryLocation, restaurantLocation, orderStatus}) {
                 title="Customer"
                 icon={createIcon(process.env.PUBLIC_URL + '/assets/img/customer.svg')}
                 />}
+
+                {deliveryPositions && deliveryPositions.map((position, index) => (
+                    <Marker
+                        key={index}
+                        position={{ lat: position.lat, lng: position.lng }}
+                        title={`Delivery Position ${index + 1}`}
+                    />
+                ))}
 
             </GoogleMap>
         </LoadScript>

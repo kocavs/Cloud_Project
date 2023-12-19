@@ -1,18 +1,43 @@
 import './OrderDetails.css'
 import DeliveryMap from './DeliverMap'
+import React, { useEffect, useState } from 'react';
+import apigClient from '../../api/apigClient';
 
 function OrderDetails({ order }) {
+  const [deliveryPositions, setDeliveryPositions] = useState([]);
+
+    useEffect(() => {
+      if (order.status === "Out For Delivery") {
+        const orderId = order.order_id; 
+        apigClient.getDeliveryDataPost({}, { "order_id": String(orderId) }, {})
+            .then(response => {
+                const data = JSON.parse(response.data.body);
+                const positions = data.DevicePositions.map(pos => ({
+                    lat: pos.Position[1], // Assuming latitude is second
+                    lng: pos.Position[0] // Assuming longitude is first
+                }));
+                console.log(positions)
+                setDeliveryPositions(positions);
+            })
+            .catch(error => {
+                console.error('Error fetching delivery data:', error);
+            });
+          }
+    }, [order.status]);
+
   return (
     <div className="order-details-container">
-      {order.status !== 'Delivered' && (
+      {order.status === 'Out For Delivery' && (
         <DeliveryMap
           // deliveryLocation={order.delivery_person_location} 
           // restaurantLocation={order.restaurant_location} 
           deliveryLocation={NaN}
           restaurantLocation={{ lat: 32.677171058659184, lng: -97.03755799641237 }}
           orderStatus={order.status}
+          deliveryPositions={deliveryPositions}
         />
       )}
+
       <h2>Order Details</h2>
       <div className="order-info">
         <p><strong>Order ID:</strong> {order.order_id}</p>

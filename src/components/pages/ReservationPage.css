@@ -1,9 +1,10 @@
 .container {
     font-family: 'Arial', sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 90vh;
+    margin: 0 250px;
     padding: 20px;
     text-align: center;
+    overflow-y: scroll;
   }
   
   .header {

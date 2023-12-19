@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import apigClient from '../../api/apigClient';
+import './ReservationPage.css'; 
 
 function ReservationPage({ userInfo }) {
     const [reservations, setReservation] = useState([]);
@@ -28,7 +29,7 @@ function ReservationPage({ userInfo }) {
 
     return (
         <div className="container">
-          <h1 className="header">Reservations for {userInfo.name}</h1>
+          <h1 className="header">Reservations for {userInfo.email}</h1>
           {reservations.length > 0 ? (
             reservations.map((reservation, index) => (
               <div key={index} className="reservation-card">
