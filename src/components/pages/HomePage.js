@@ -10,10 +10,6 @@ function HomePage({ userInfo }) {
   const [foodRecommendations, setFoodRecommendations] = useState([]);
 
   useEffect(() => {
-    // if(! isAuthenticated){
-    //   setMessages([{ sender: "bot", text: "Please login first to use the service." }]);
-    //   return;
-    // }
     // Initialize WebSocket connection
     const ws = new WebSocket('wss://gnzcvg3d4l.execute-api.us-east-1.amazonaws.com/test/');
 

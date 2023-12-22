@@ -17,7 +17,7 @@ function Sidebar({  isAuthenticated, setIsAuthenticated, redirectToLogin, userIn
     <div className="sidebar">
       <div className="logo">EATexas</div>
       <div className="navigation">
-        <NavLink to="/Cloud_Project/" end activeClassName="active" className="nav-button" >ChatBot</NavLink>
+        <NavLink to="/Cloud_Project/homepage" end activeClassName="active" className="nav-button" >ChatBot</NavLink>
         <NavLink to="/Cloud_Project/orders" activeClassName="active" className="nav-button" >Orders</NavLink>
         <NavLink to="/Cloud_Project/reservations" activeClassName="active" className="nav-button" >Reservations</NavLink>
       </div>
