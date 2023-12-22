@@ -23,8 +23,6 @@ function RestaurantDetail({ restaurant }) {
           <p>No menu available.</p>
         )}
       </div>
-      
-      <button className="order-button">Want To Order?</button>
     </div>
   );
 }

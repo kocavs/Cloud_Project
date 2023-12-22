@@ -13,12 +13,13 @@ function RestaurantCard({ restaurant, onSelect, isSelected }) {
       onClick={() => onSelect(restaurant)}
     >
       <h3 className="restaurant-name">{restaurant.name}</h3>
+      <div className="restaurant-info">
+        <span className="restaurant-price-range">{restaurant.price_range || 'N/A'}</span>
+        <span className="restaurant-rating">{renderRating(restaurant.rating)}</span>
+      </div>
       <p className="restaurant-category">{restaurant.category}</p>
-      <p className="restaurant-price-range">{restaurant.price_range || 'N/A'}</p>
-      <p className="restaurant-rating">{renderRating(restaurant.rating)}</p>
     </div>
   );
 }
 
 export default RestaurantCard;
-
